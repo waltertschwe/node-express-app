@@ -10,6 +10,6 @@ app.get('/test', (req, res) => {
 })
 
 app.listen(3000, () => {
-     console.log('Listening on 80')
+     console.log('Listening on 3000')
 })
 
