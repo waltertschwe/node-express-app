@@ -13,9 +13,12 @@ const MONGO_DB_USER = process.env.MONGO_DB_USER
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD
 
 var db
+var router = express.Router()
 
-// add REACT
+// set views directory to match components directory
 app.set('views', __dirname + '/components');
+
+// set jsx as the view engine
 app.engine('jsx', ReactEngine());
 
 
@@ -57,13 +60,17 @@ app.get('/create', (req, res) => {
 app.post('/create', (req, res) => {
   console.log(req.body)
   db.collection('my_collection').save(req.body, (err, result) => {
-  	if (err) return console.log(err)
+    if (err) return console.log(err)
 
     console.log('saved to database')
   })
   
   res.sendFile(__dirname + '/public/create.html')
 })
+
+// REACT
+app.engine('jsx', reactEngine({wrapper: 'html.jsx'}));
+
 
 
 
