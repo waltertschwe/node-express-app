@@ -1,7 +1,14 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
 
 app.use(express.static('public'))
+
+// urlencoded tells bodyparser to extract
+// data from form and add to body property
+// see all data in form field req.body
+app.use(bodyParser.urlencoded({extended: true}))
+
 
 app.get('/', (req, res) => {
     res.send('test')
@@ -24,6 +31,7 @@ app.get('/create', (req, res) => {
 })
 
 app.post('/create', (req, res) => {
-  console.log('Hellooooooooooooooooo!')
+  console.log(req.body)
+  res.sendFile(__dirname + '/public/create.html')
 })
 
