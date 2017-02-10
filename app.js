@@ -19,3 +19,11 @@ app.get('/node-js', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
 })
 
+app.get('/create', (req, res) => {
+	res.sendFile(__dirname + '/public/create.html')
+})
+
+app.post('/create', (req, res) => {
+  console.log('Hellooooooooooooooooo!')
+})
+
