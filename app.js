@@ -14,6 +14,8 @@ var db
 MongoClient.connect( 'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
 (err, database) => {
  	if (err) return console.log(err)
+ 		
+ 	// have connection to Mongo startup server	
  	db = database
  	app.listen(3000, () => {
     	console.log('Listening on 80')
