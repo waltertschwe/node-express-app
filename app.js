@@ -1,6 +1,19 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const dotenv = require('dotenv');
+const MongoClient = require('mongodb').MongoClient
+
 const app = express()
+dotenv.load();
+
+const MONGO_DB_USER = process.env.MONGO_DB_USER
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD
+
+MongoClient.connect(
+	'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
+	(err, database) => {
+  // ... start the server
+})
 
 app.use(express.static('public'))
 
