@@ -14,7 +14,7 @@ var db
 MongoClient.connect( 'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
 (err, database) => {
  	if (err) return console.log(err)
- 		
+
  	// have connection to Mongo startup server	
  	db = database
  	app.listen(3000, () => {
@@ -48,6 +48,17 @@ app.get('/create', (req, res) => {
 
 app.post('/create', (req, res) => {
   console.log(req.body)
+  db.collection('create').save(req.body, (err, result) => {
+  	if (err) return console.log(err)
+
+    console.log('saved to database')
+  })
+  
   res.sendFile(__dirname + '/public/create.html')
 })
+
+
+
+
+
 
