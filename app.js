@@ -69,7 +69,7 @@ app.post('/create', (req, res) => {
 })
 
 // REACT
-app.engine('jsx', reactEngine({wrapper: 'html.jsx'}));
+app.engine('jsx', ReactEngine({wrapper: 'html.jsx'}));
 
 
 
