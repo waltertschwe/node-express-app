@@ -2,14 +2,22 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv');
 const MongoClient = require('mongodb').MongoClient
+const ReactEngine = require('express-react-engine');
 
 const app = express()
+
+// load environment variables
 dotenv.load();
 
 const MONGO_DB_USER = process.env.MONGO_DB_USER
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD
 
 var db
+
+// add REACT
+app.set('views', __dirname + '/components');
+app.engine('jsx', ReactEngine());
+
 
 MongoClient.connect( 'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
 (err, database) => {
@@ -48,7 +56,7 @@ app.get('/create', (req, res) => {
 
 app.post('/create', (req, res) => {
   console.log(req.body)
-  db.collection('create').save(req.body, (err, result) => {
+  db.collection('my_collection').save(req.body, (err, result) => {
   	if (err) return console.log(err)
 
     console.log('saved to database')
