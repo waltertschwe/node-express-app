@@ -9,10 +9,15 @@ dotenv.load();
 const MONGO_DB_USER = process.env.MONGO_DB_USER
 const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD
 
-MongoClient.connect(
-	'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
-	(err, database) => {
-  // ... start the server
+var db
+
+MongoClient.connect( 'mongodb://' + MONGO_DB_USER + ':' + MONGO_DB_PASSWORD + '@ds149069.mlab.com:49069/mongo-test', 
+(err, database) => {
+ 	if (err) return console.log(err)
+ 	db = database
+ 	app.listen(3000, () => {
+    	console.log('Listening on 80')
+	})
 })
 
 app.use(express.static('public'))
@@ -29,10 +34,6 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
     res.send('test page')
-})
-
-app.listen(3000, () => {
-    console.log('Listening on 80')
 })
 
 app.get('/node-js', (req, res) => {
